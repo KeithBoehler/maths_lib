@@ -1,17 +1,17 @@
 use std::io;
-
+use std::f32;
 struct QuadraticCoEff {
-    a: i32,
-    b: i32,
-    c: i32,
+    a: f32,
+    b: f32,
+    c: f32,
 }
 fn main() {
     println!("Hello, world!");
 
     let mut quad1 = QuadraticCoEff{
-        a: 0,
-        b: 0,
-        c: 0,
+        a: 0.0,
+        b: 0.0,
+        c: 0.0,
     };
     let mut line_input = String::new();
     println!("Welcome to Quadratic equation solver! Enter values for ax^2 + bx + c");
@@ -33,11 +33,21 @@ fn main() {
     line_input.clear();
 
 
-    let quadradic_discriminant = (quad1.b * quad1.b) - 4 * quad1.a * quad1.c;
+    let quadradic_discriminant = (quad1.b * quad1.b) - 4.0 * quad1.a * quad1.c;
 
 
-    if quadradic_discriminant < 0 {
+    if quadradic_discriminant < 0.0 {
         println!("Solution is imaginary. ");
+    } else if quadradic_discriminant == 0.0 {
+        let sol1 = (quad1.b + quadradic_discriminant.sqrt()) / (2.0 * quad1.a);
+        println!("There is one real solution: {}", sol1);
+    } else {
+        let sol1 = (quad1.b + quadradic_discriminant.sqrt()) / (2.0 * quad1.a);
+        let sol2 = (quad1.b - quadradic_discriminant.sqrt()) / (2.0 * quad1.a);
+        println!("There are two solutions. Positive root: {} and negative root: {}", sol1, sol2);
     }
+
+    println!("Fin");
+
 
 }
