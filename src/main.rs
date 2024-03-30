@@ -1,5 +1,5 @@
-use std::io;
-use std::f32;
+use core::f32;
+use std::env;
 use std::process;
 
 struct QuadraticCoEff {
@@ -10,36 +10,22 @@ struct QuadraticCoEff {
 
 struct AnsHolder {
     d: f32,
-    r1: f32,
+    r1: f32, 
     r2: f32,
 }
 
+
 fn main() {
     println!("Hello, world!");
-
-    let mut quad1 = QuadraticCoEff{
-        a: 0.0,
-        b: 0.0,
-        c: 0.0,
-    };
-    let mut line_input = String::new();
     println!("Welcome to Quadratic equation solver! Enter values for ax^2 + bx + c");
 
+    let args: Vec<_> = env::args().collect();
 
-    println!("Enter value for a: ");
-    io::stdin().read_line(&mut line_input).expect("Failed to read input. ");
-    quad1.a = line_input.trim().parse().expect("Input not an integer!");
-    line_input.clear();
-
-    println!("Enter value for b: ");
-    io::stdin().read_line(&mut line_input).expect("Failed to read input. ");
-    quad1.b = line_input.trim().parse().expect("Input not an integer!");
-    line_input.clear();
-
-    println!("Enter value for c: ");
-    io::stdin().read_line(&mut line_input).expect("Failed to read input. ");
-    quad1.c = line_input.trim().parse().expect("Input not an integer!");
-    line_input.clear();
+    let quad1 = QuadraticCoEff{
+        a: args[1].trim().parse::<f32>().unwrap(),
+        b: args[2].trim().parse::<f32>().unwrap(),
+        c: args[3].trim().parse::<f32>().unwrap(),
+   };
 
     let equ_solustion = quad_calc(quad1);
 
